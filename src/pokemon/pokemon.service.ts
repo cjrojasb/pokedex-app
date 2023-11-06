@@ -81,10 +81,22 @@ export class PokemonService {
     }
   }
 
-  async remove(term: string) {
-    const pokemon = await this.findOne(term);
-    await pokemon.deleteOne();
+  async remove(id: string) {
+    // findByIdAndDelete only with mongoID
+    // await this.pokemonModel.findByIdAndDelete(id);
+
+    const { deletedCount } = await this.pokemonModel.deleteOne({ _id: id });
+
+    if (deletedCount === 0) {
+      throw new BadRequestException(`Pokemon with id ${id} not found.`);
+    }
   }
+
+  // delete without custom pipe and without mongoID
+  // async remove(term: string) {
+  //   const pokemon = await this.findOne(term);
+  //   await pokemon.deleteOne();
+  // }
 
   // not controller errors
   private handleExceptions(error: any) {
