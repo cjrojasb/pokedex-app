@@ -3,21 +3,21 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Pokemon } from 'src/pokemon/entities/pokemon.entity';
 import { PokemonResponse } from './interfaces/pokemon-response.interface';
-import axios, { AxiosInstance } from 'axios';
+import { AxiosAdapter } from 'src/common/adapters/axios.adapter';
 
 @Injectable()
 export class SeedService {
-  private readonly http: AxiosInstance = axios;
   private pokeapiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=650';
 
   constructor(
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
+    private readonly http: AxiosAdapter,
   ) {}
 
   async setSeed() {
     await this.pokemonModel.deleteMany({});
-    const { data } = await this.http.get<PokemonResponse>(this.pokeapiUrl);
+    const data = await this.http.get<PokemonResponse>(this.pokeapiUrl);
 
     // insert multiple simultaneous records with promise All
     // const insertPromises = [];
