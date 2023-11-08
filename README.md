@@ -7,6 +7,7 @@
 
 ### Running in dev
 1. Clone this repository
+
 2. Execute
 ```bash
 npm install
@@ -19,6 +20,11 @@ npm i -g @nestjs/cli
 ```bash
 docker-compose up -d
 ```
+5. Load initial data
+```bash
+http://localhost:8000/api/v2/seed
+```
+
 
 ## Dependencies
 * NestJS
