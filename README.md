@@ -20,7 +20,15 @@ npm i -g @nestjs/cli
 ```bash
 docker-compose up -d
 ```
-5. Load initial data
+5. Create __.env__ file with __.env.template__ content
+
+6. Running app server in dev mode
+````
+npm run start:dev
+````
+
+
+7. Load initial data
 ```bash
 http://localhost:8000/api/v2/seed
 ```
