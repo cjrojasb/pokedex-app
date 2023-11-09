@@ -23,17 +23,28 @@ docker-compose up -d
 5. Create __.env__ file with __.env.template__ content
 
 6. Running app server in dev mode
-````
+```bash
 npm run start:dev
-````
-
+```
 
 7. Load initial data
 ```bash
 http://localhost:8000/api/v2/seed
 ```
 
-
 ## Dependencies
 * NestJS
 * MongoDB
+
+## Production Build
+1. Create file 
+```
+.env.prod
+```
+
+2. Fill environment production vars
+
+3. Create image
+```bash
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
